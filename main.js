@@ -1,3 +1,4 @@
+var open = require('open');
 var http = require('http');
 var fileShare = require('./app')({
     filesFolderPath: (process.argv[3] || null),
@@ -53,7 +54,9 @@ function onListening() {
         console.log('Listening on pipe ' + addr);
     } else {
         fileShare.addresses.forEach(function (address) {
-            console.log('Listening on http://' + address + ':' + addr.port);
+            var url = 'http://' + address + ':' + addr.port;
+            console.log('Listening on ' + url);
+            open(url);
         });
     }
 }

@@ -1,13 +1,35 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <meta charset="utf-8">
+    <title>Node.js LAN File Sharing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="manifest" href="/icons/manifest.json">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#006900">
+    <meta name="theme-color" content="#006900">
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #IPandPort {
+            color: #0af;
+            font-family: monospace;
+            line-height: 40px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -21,6 +43,17 @@
             </li>
         </ul>
     </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-12 text-center">
+                <img id="theQRCode">
+                <h4 id="IPandPort"></h4>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/address.js"></script>
+    <script src="/js/qr.js"></script>
 </body>
 
 </html>

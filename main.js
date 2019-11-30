@@ -19,6 +19,9 @@ var fileShare = require('./app')({
 
 var server = http.createServer(fileShare.app);
 
+// Init chat
+require('./chat')(server);
+
 function onError(error) {
     if (error.syscall !== 'listen') {
         throw error;

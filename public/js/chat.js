@@ -1,4 +1,7 @@
 function copyText(e) {
+    if (!window.isSecureContext) {
+        return;
+    }
     // var text = $(e).parent().parent().children('.messageBody').text()
     var text = $(e).children('.messageBody').text()
     navigator.clipboard.writeText(text).then(function () {
@@ -121,7 +124,10 @@ $(function () {
         var $messageDiv = $('<li class="message" onclick="copyText(this);"/>')
             .data('username', data.username)
             .addClass(typingClass)
-            .append($usernameDiv, $messageBodyDiv, $copy);
+            .append($usernameDiv, $messageBodyDiv);
+        if (window.isSecureContext) {
+            $messageDiv.append($copy);
+        }
 
         addMessageElement($messageDiv, options);
     }

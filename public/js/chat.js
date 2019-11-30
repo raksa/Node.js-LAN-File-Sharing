@@ -1,4 +1,28 @@
+function copyText(e) {
+    // var text = $(e).parent().parent().children('.messageBody').text()
+    var text = $(e).children('.messageBody').text()
+    navigator.clipboard.writeText(text).then(function () {
+        /* clipboard successfully set */
+        showSnackbar("Text has been copied to clipboard");
+    }, function () {
+        showSnackbar("Text cannot be copied");
+        /* clipboard write failed */
+    });
+}
+
+function showSnackbar(text = 'Unknown') {
+    var div = document.getElementById("snackbar")
+    div.innerHTML = text;
+    div.className = "show";
+    setTimeout(function () {
+        div.className = div.className.replace("show", "");
+    }, 3000);
+}
+
 $(function () {
+
+
+
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
     var COLORS = [
@@ -90,11 +114,14 @@ $(function () {
         var $messageBodyDiv = $('<span class="messageBody">')
             .text(data.message);
 
+        var $copy = $('<div class="badge badge-info">')
+            .text('copy');
+
         var typingClass = data.typing ? 'typing' : '';
-        var $messageDiv = $('<li class="message"/>')
+        var $messageDiv = $('<li class="message" onclick="copyText(this);"/>')
             .data('username', data.username)
             .addClass(typingClass)
-            .append($usernameDiv, $messageBodyDiv);
+            .append($usernameDiv, $messageBodyDiv, $copy);
 
         addMessageElement($messageDiv, options);
     }

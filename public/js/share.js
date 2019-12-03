@@ -30,7 +30,7 @@ function arrayEquals(ar1, ar2) {
     if (ar1.length != ar2.length) {
         return false;
     } else {
-        for (let index = 0; index < ar1.length; index++) {
+        for (var index = 0; index < ar1.length; index++) {
             if (ar1[index] != ar2[index]) return false;
         }
         return true;

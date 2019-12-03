@@ -52,7 +52,7 @@ $(function () {
 
     var socket = io();
 
-    const addParticipantsMessage = (data) => {
+    var addParticipantsMessage = function (data) {
         var message = '';
         if (data.numUsers === 1) {
             message += "there's 1 participant";
@@ -63,7 +63,7 @@ $(function () {
     }
 
     // Sets the client's username
-    const setUsername = () => {
+    var setUsername = function () {
         username = cleanInput($usernameInput.val().trim());
 
         // If the username is valid
@@ -79,7 +79,7 @@ $(function () {
     }
 
     // Sends a chat message
-    const sendMessage = () => {
+    var sendMessage = function () {
         var message = $inputMessage.val();
         // Prevent markup from being injected into the message
         message = cleanInput(message);
@@ -96,13 +96,13 @@ $(function () {
     }
 
     // Log a message
-    const log = (message, options) => {
+    var log = function (message, options) {
         var $el = $('<li>').addClass('log').text(message);
         addMessageElement($el, options);
     }
 
     // Adds the visual chat message to the message list
-    const addChatMessage = (data, options) => {
+    var addChatMessage = function (data, options) {
         // Don't fade the message in if there is an 'X was typing'
         var $typingMessages = getTypingMessages(data);
         options = options || {};
@@ -133,14 +133,14 @@ $(function () {
     }
 
     // Adds the visual chat typing message
-    const addChatTyping = (data) => {
+    var addChatTyping = function (data) {
         data.typing = true;
         data.message = 'is typing';
         addChatMessage(data);
     }
 
     // Removes the visual chat typing message
-    const removeChatTyping = (data) => {
+    var removeChatTyping = function (data) {
         getTypingMessages(data).fadeOut(function () {
             $(this).remove();
         });
@@ -151,7 +151,7 @@ $(function () {
     // options.fade - If the element should fade-in (default = true)
     // options.prepend - If the element should prepend
     //   all other messages (default = false)
-    const addMessageElement = (el, options) => {
+    var addMessageElement = function (el, options) {
         var $el = $(el);
 
         // Setup default options
@@ -178,12 +178,12 @@ $(function () {
     }
 
     // Prevents input from having injected markup
-    const cleanInput = (input) => {
+    var cleanInput = function (input) {
         return $('<div/>').text(input).html();
     }
 
     // Updates the typing event
-    const updateTyping = () => {
+    var updateTyping = function () {
         if (connected) {
             if (!typing) {
                 typing = true;
@@ -191,7 +191,7 @@ $(function () {
             }
             lastTypingTime = (new Date()).getTime();
 
-            setTimeout(() => {
+            setTimeout(function () {
                 var typingTimer = (new Date()).getTime();
                 var timeDiff = typingTimer - lastTypingTime;
                 if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
@@ -203,14 +203,14 @@ $(function () {
     }
 
     // Gets the 'X is typing' messages of a user
-    const getTypingMessages = (data) => {
+    var getTypingMessages = function (data) {
         return $('.typing.message').filter(function (i) {
             return $(this).data('username') === data.username;
         });
     }
 
     // Gets the color of a username through our hash function
-    const getUsernameColor = (username) => {
+    var getUsernameColor = function (username) {
         // Compute hash code
         var hash = 7;
         for (var i = 0; i < username.length; i++) {
@@ -240,26 +240,26 @@ $(function () {
         }
     });
 
-    $inputMessage.on('input', () => {
+    $inputMessage.on('input', function () {
         updateTyping();
     });
 
     // Click events
 
     // Focus input when clicking anywhere on login page
-    $loginPage.click(() => {
+    $loginPage.click(function () {
         $currentInput.focus();
     });
 
     // Focus input when clicking on the message input's border
-    $inputMessage.click(() => {
+    $inputMessage.click(function () {
         $inputMessage.focus();
     });
 
     // Socket events
 
     // Whenever the server emits 'login', log the login message
-    socket.on('login', (data) => {
+    socket.on('login', function (data) {
         connected = true;
         // Display the welcome message
         var message = "Welcome to Socket.IO Chat – ";
@@ -270,45 +270,45 @@ $(function () {
     });
 
     // Whenever the server emits 'new message', update the chat body
-    socket.on('new message', (data) => {
+    socket.on('new message', function (data) {
         addChatMessage(data);
     });
 
     // Whenever the server emits 'user joined', log it in the chat body
-    socket.on('user joined', (data) => {
+    socket.on('user joined', function (data) {
         log(data.username + ' joined');
         addParticipantsMessage(data);
     });
 
     // Whenever the server emits 'user left', log it in the chat body
-    socket.on('user left', (data) => {
+    socket.on('user left', function (data) {
         log(data.username + ' left');
         addParticipantsMessage(data);
         removeChatTyping(data);
     });
 
     // Whenever the server emits 'typing', show the typing message
-    socket.on('typing', (data) => {
+    socket.on('typing', function (data) {
         addChatTyping(data);
     });
 
     // Whenever the server emits 'stop typing', kill the typing message
-    socket.on('stop typing', (data) => {
+    socket.on('stop typing', function (data) {
         removeChatTyping(data);
     });
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', function () {
         log('you have been disconnected');
     });
 
-    socket.on('reconnect', () => {
+    socket.on('reconnect', function () {
         log('you have been reconnected');
         if (username) {
             socket.emit('add user', username);
         }
     });
 
-    socket.on('reconnect_error', () => {
+    socket.on('reconnect_error', function () {
         log('attempt to reconnect has failed');
     });
 

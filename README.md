@@ -1,11 +1,12 @@
 # Node.js-LAN-File-Sharing
-A small Node.js app designed for sharing files while on the same network. Especially useful when you are trying to get a file from a friend and their device has a single broken USB port.
+A small Node.js app designed for sharing files or chatting while on the same network. Especially useful when you are trying to get a file from a friend and their device has a single broken USB port or share clipboard.
 
 ## Features
 - Easy to use Drag and Drop file upload.
 - Faster than uploading to a server then downloading since you are the server.
 - Works with large files (tested with >2gb).
 - Fast loading and opening due to light weight (no library) Javascript and customized bootstrap.
+- Node user account is not required for the chat
 
 ## How to use
 0. Clone (or download as zip) this project from github
@@ -21,11 +22,11 @@ PORT enviroment varible is used to change the port. e.g. ```export PORT=3030; no
 
 ## Screenshots
 
-![Imgur](http://i.imgur.com/fxuSrmE.png)
+![Imgur](/screenshot/ss1.png)
 
 Your LAN ip is shown in page in adition to console output. Files in "files" directory is also listed for download.  
 
-![Imgur](http://i.imgur.com/U4IFJsj.png)
+![Imgur](/screenshot/ss1.png)
 
 Drag and Drop file upload. Achived without any javascript library.
 

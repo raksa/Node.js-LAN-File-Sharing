@@ -10,10 +10,10 @@
   "author": "Baris Senkal <barissenkal@gmail.com> (http://etekmekketcap.com)",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0",
-    "formidable": "^1.1.1",
-    "open": "^7.0.0",
+    "express": "^4.21.2",
+    "formidable": "^1.2.6",
+    "open": "^7.4.2",
     "qr-image": "^3.2.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.5.1"
   }
 }

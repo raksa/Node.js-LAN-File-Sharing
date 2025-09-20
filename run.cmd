@@ -1,1 +1,0 @@
-.\node-wins\node.exe .\main.js

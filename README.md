@@ -18,18 +18,22 @@ A small Node.js app designed for sharing files or chatting while on the same net
 
 Project saves sent files in "files" folder. Also files in "files" folder can be downloaded from the browser.
 
-PORT enviroment varible is used to change the port. e.g. ```export PORT=3030; node main.js```
+PORT environment variable is used to change the port. e.g. ```export PORT=3030; node main.js```
 
 ## Screenshots
 
-![Imgur](/screenshot/ss1.png)
+![Home page](/screenshot/ss1.png)
 
-Your LAN ip is shown in page in adition to console output. Files in "files" directory is also listed for download.  
+Your LAN ip is shown in page in addition to console output. Files in "files" directory is also listed for download.
 
-![Imgur](/screenshot/ss1.png)
+![File Sharing](/screenshot/ss2.png)
 
-Drag and Drop file upload. Achived without any javascript library.
+Drag and Drop file upload. Archived without any javascript library.
+
+![Chat](/screenshot/ss3.png)
+
+Simple chat using socket.io.
 
 ## TODO
-I am planning to turn this project into a Electron app so people who are scared easly from terminals can use it as well.
-Also pause/resume, progress bar and uploading folders are posible improvements I might implement in the future.
+I am planning to turn this project into a Electron app so people who are scared easily from terminals can use it as well.
+Also pause/resume, progress bar and uploading folders are possible improvements I might implement in the future.
